@@ -24,10 +24,13 @@ file(GLOB MUDBG_HEADER_FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/mudbg/*.h")
 file(GLOB MUDBG_SOURCE_FILES
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
 )
+file(GLOB EXT_LINENOISE_SRC_FILES
+    "${CMAKE_CURRENT_SOURCE_DIR}/ext/linenoise/linenoise.c"
+)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-
-add_executable(mudbg ${MUDBG_SOURCE_FILES})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ext)
+add_executable(mudbg ${MUDBG_SOURCE_FILES} ${EXT_LINENOISE_SRC_FILES})
 target_include_directories(mudbg PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/mudbg
 )
