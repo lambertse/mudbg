@@ -1,8 +1,10 @@
 #pragma once
 
+#include <cstdint>
 #include <memory>
-#include <vector>
 #include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace mudbg {
 
@@ -27,7 +29,7 @@ class Command {
       : type_(type), args_(std::move(args)) {}
   CommandType type() const { return type_; }
   virtual ~Command() = default;
-  virtual CommandResult execute() = 0;
+  std::vector<std::string> args() const { return args_; }
 
   static std::shared_ptr<Command> parse(const std::string& line);
 
@@ -39,6 +41,11 @@ class Command {
 class ContinueCommand : public Command {
  public:
   ContinueCommand() : Command(CommandType::CONTINUE) {}
-  CommandResult execute() override;
+};
+
+class BreakCommand : public Command {
+ public:
+  BreakCommand(const std::string& location)
+      : Command(CommandType::BREAKPOINT_SET, {location}) {}
 };
 }  // namespace mudbg

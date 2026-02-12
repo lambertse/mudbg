@@ -1,8 +1,9 @@
-#include "mudbg/command.h"
 #include <iostream>
 #include <sstream>
-#include <vector>
 #include <string>
+#include <vector>
+
+#include "mudbg/command.h"
 
 namespace mudbg {
 
@@ -33,11 +34,4 @@ std::shared_ptr<Command> Command::parse(const std::string& line) {
 
   return nullptr;
 }
-
-CommandResult ContinueCommand::execute() {
-  std::cout << "Continuing execution...\n";
-  // Placeholder for continue command execution logic
-  return CommandResult::SUCCESS;
-}
-
 }  // namespace mudbg
